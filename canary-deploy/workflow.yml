@@ -11,7 +11,7 @@ steps:
   spec:
     command: apply
     file: canary-deploy/complete-demo.yaml
-    namespace: default
+    namespace: sock-shop
     cluster:
       name: nebula-demo-cluster
       url:
