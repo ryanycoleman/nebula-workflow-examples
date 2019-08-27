@@ -2,15 +2,12 @@ version: v1
 description: Nebula Canary Deploy Demo with Istio
 
 steps:
-- name: init-workflow
-  image: alpine:latest
-  input:
-    - echo "Initializing workflow - Nebula Canary Deploy Demo with Istio"
 - name: create-namespace
   image: projectnebula/kubectl:bf8ecb9
   spec:
     command: apply
     file: canary-deploy/sock-shop-namespace.yaml
+    namespace: default
     cluster:
       name: nebula-demo-cluster
       url:
