@@ -11,7 +11,6 @@ steps:
     - echo "  2. Deploying all services and deployments to create the Sock Shop application"
     - echo "  3. Creating the ingress to access the service"
     - echo "This workflow example assumes that you have an ingress controller installed and configured (as does GKE by default)."
-
 - name: create-namespace
   image: projectnebula/kubectl:bf8ecb9
   spec:
@@ -34,7 +33,6 @@ steps:
       repository: https://github.com/kenazk/nebula-workflow-examples.git
   dependsOn:
   - init-workflow
-
 - name: deploy-sockshop-demo
   image: projectnebula/kubectl:bf8ecb9
   spec:
@@ -57,7 +55,6 @@ steps:
       repository: https://github.com/kenazk/nebula-workflow-examples.git
   dependsOn:
   - create-namespace
-
 - name: create-ingresss
   image: projectnebula/kubectl:bf8ecb9
     spec:
@@ -80,7 +77,6 @@ steps:
         repository: https://github.com/kenazk/nebula-workflow-examples.git
     dependsOn:
     - deploy-sockshop-demo
-
 - name: slack-notify
   image: projectnebula/slack-notification:bf8ecb9
   spec:
