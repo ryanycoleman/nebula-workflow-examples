@@ -81,13 +81,13 @@ steps:
   dependsOn:
   - deploy-sockshop-demo
 
-- name: slack-notify
-  image: projectnebula/slack-notification:bf8ecb9
-  spec:
-    apitoken:
-      $type: Secret
-      name: slack-token
-    channel: "#nebula-workflows"
-    message: "Successfully deployed Sock Shop demo!"
-  dependsOn:
-  - create-ingress
+# - name: slack-notify
+#   image: projectnebula/slack-notification:bf8ecb9
+#   spec:
+#     apitoken:
+#       $type: Secret
+#       name: slack-token
+#     channel: "#nebula-workflows"
+#     message: "Successfully deployed Sock Shop demo!"
+#   dependsOn:
+#   - create-ingress
