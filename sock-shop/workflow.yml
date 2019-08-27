@@ -35,28 +35,28 @@ steps:
   dependsOn:
   - init-workflow
 
-# - name: deploy-sockshop-demo
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: sock-shop/k8s/complete-demo.yaml
-#     namespace: sock-shop
-#     cluster:
-#       name: nebula-demo-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/kenazk/nebula-workflow-examples.git
-#   dependsOn:
-#   - create-namespace
+- name: deploy-sockshop-demo
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/complete-demo.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
 
 # - name: create-ingresss
 #   image: projectnebula/kubectl:bf8ecb9
