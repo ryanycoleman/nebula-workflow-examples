@@ -16,7 +16,7 @@ steps:
   image: projectnebula/kubectl:bf8ecb9
   spec:
     command: apply
-    file: sock-shop/k8s/sock-shop-namespace.yaml
+    file: sock-shop/k8s/sock-shop-namespace.yml
     namespace: default
     cluster:
       name: nebula-demo-cluster
@@ -39,7 +39,7 @@ steps:
   image: projectnebula/kubectl:bf8ecb9
   spec:
     command: apply
-    file: sock-shop/k8s/complete-demo.yaml
+    file: sock-shop/k8s/complete-demo.yml
     namespace: sock-shop
     cluster:
       name: nebula-demo-cluster
