@@ -1,0 +1,93 @@
+version: v1
+description: Deploy Sock Shop app onto GKE cluster
+
+steps:
+- name: init-workflow
+  image: alpine:latest
+  input:
+    - echo "Initializing workflow - Deploy Sock Shop app onto GKE cluster"
+    - echo "This Workflow will perform 3 steps:"
+    - echo "  1. Creating a 'sock-shop' namespace on the Kubernetes cluster"
+    - echo "  2. Deploying all services and deployments to create the Sock Shop application"
+    - echo "  3. Creating the ingress to access the service"
+    - echo "This workflow example assumes that you have an ingress controller installed and configured (as does GKE by default)."
+
+- name: create-namespace
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/sock-shop-namespace.yaml
+    namespace: default
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - init-workflow
+
+- name: deploy-sockshop-demo
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/complete-demo.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: create-ingresss
+  image: projectnebula/kubectl:bf8ecb9
+    spec:
+      command: apply
+      file: sock-shop/k8s/front-end-ingress.yaml
+      namespace: sock-shop
+      cluster:
+        name: nebula-demo-cluster
+        url:
+          $type: Secret
+          name: url
+        cadata:
+          $type: Secret
+          name: cadata
+        token:
+          $type: Secret
+          name: token
+      git:
+        name: nebula-workflow-examples
+        repository: https://github.com/kenazk/nebula-workflow-examples.git
+    dependsOn:
+    - deploy-sockshop-demo
+
+- name: slack-notify
+  image: projectnebula/slack-notification:bf8ecb9
+  spec:
+    apitoken:
+      $type: Secret
+      name: slack-token
+    channel: "#nebula-workflows"
+    message: "Successfully deployed Sock Shop demo!"
+  dependsOn:
+  - create-ingress
