@@ -741,13 +741,13 @@ steps:
     # - shipping-service
     # - user-service
 
-- name: slack-notify
-  image: projectnebula/slack-notification:bf8ecb9
-  spec:
-    apitoken:
-      $type: Secret
-      name: slack-token
-    channel: "#nebula-workflows"
-    message: "Successfully deployed Sock Shop demo!"
-  dependsOn:
-  - expose-service
+# - name: slack-notify
+#   image: projectnebula/slack-notification:bf8ecb9
+#   spec:
+#     apitoken:
+#       $type: Secret
+#       name: slack-token
+#     channel: "#nebula-workflows"
+#     message: "Successfully deployed Sock Shop demo!"
+#   dependsOn:
+#   - expose-service
