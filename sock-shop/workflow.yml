@@ -730,16 +730,16 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/kenazk/nebula-workflow-examples.git
   dependsOn:
-    - carts-service
-    - catalogue-service
+    # - carts-service
+    # - catalogue-service
     - front-end-service
-    - orders-service
-    - payment-service
-    - queue-master-service
-    - rabbitmq-service
-    - session-db-service
-    - shipping-service
-    - user-service
+    # - orders-service
+    # - payment-service
+    # - queue-master-service
+    # - rabbitmq-service
+    # - session-db-service
+    # - shipping-service
+    # - user-service
 
 - name: slack-notify
   image: projectnebula/slack-notification:bf8ecb9
