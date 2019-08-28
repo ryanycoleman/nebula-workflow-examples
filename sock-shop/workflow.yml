@@ -6,11 +6,41 @@ steps:
   image: alpine:latest
   input:
     - echo "Initializing workflow - Deploy Sock Shop app onto GKE cluster"
-    - echo "This Workflow will perform 3 steps:"
+    - echo "This Workflow will perform the following steps:"
+    - echo "  0. Provision GKE cluster with Terraform"
     - echo "  1. Creating a 'sock-shop' namespace on the Kubernetes cluster"
     - echo "  2. Deploying all services and deployments to create the Sock Shop application"
     - echo "  3. Creating the ingress to access the service"
     - echo "This workflow example assumes that you have an ingress controller installed and configured (as does GKE by default)."
+
+- name: provision-gke-with-terraform
+  image: projectnebula/terraform:bf8ecb9
+  spec:
+    vars:
+      gcp_region: us-east1
+      gcp_location: us-east1-b
+      gcp_project: kenazk-sandbox
+    workspace: nebula-demo
+    directory: provision-gke-terraform/infra/
+    credentials:
+      credentials.json:
+        $type: Secret
+        name: credentials
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/puppetlabs/nebula-workflow-examples.git
+  dependsOn:
+  - init-workflow
+- name: slack-notify
+  image: projectnebula/slack-notification:bf8ecb9
+  spec:
+    apitoken:
+      $type: Secret
+      name: slack-token
+    channel: "#nebula-workflows"
+    message: "Provisioning K8s with Terraform succeeded! Good job everyone."
+  dependsOn:
+  - provision-gke-with-terraform
 
 - name: create-namespace
   image: projectnebula/kubectl:bf8ecb9
@@ -33,7 +63,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/kenazk/nebula-workflow-examples.git
   dependsOn:
-  - init-workflow
+  - provision-gke-with-terraform
 
 - name: carts-db-deployment 
   image: projectnebula/kubectl:bf8ecb9
