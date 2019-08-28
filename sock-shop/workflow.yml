@@ -16,7 +16,7 @@ steps:
   image: projectnebula/kubectl:bf8ecb9
   spec:
     command: apply
-    file: sock-shop/k8s/sock-shop-ns.yml
+    file: sock-shop/k8s/sock-shop-ns.yaml
     namespace: default
     cluster:
       name: nebula-demo-cluster
@@ -102,7 +102,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/kenazk/nebula-workflow-examples.git
   dependsOn:
-  - create-namespace
+  - carts-db-service
 
 - name: carts-svc 
   image: projectnebula/kubectl:bf8ecb9
@@ -194,7 +194,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/kenazk/nebula-workflow-examples.git
   dependsOn:
-  - create-namespace
+  - catalogue-db-service
 
 - name: catalogue-service 
   image: projectnebula/kubectl:bf8ecb9
@@ -332,7 +332,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/kenazk/nebula-workflow-examples.git
   dependsOn:
-  - create-namespace
+  - orders-db-service
 
 - name: orders-service
   image: projectnebula/kubectl:bf8ecb9
@@ -654,7 +654,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/kenazk/nebula-workflow-examples.git
   dependsOn:
-  - create-namespace
+  - user-db-service
 
 - name: user-service
   image: projectnebula/kubectl:bf8ecb9
