@@ -679,7 +679,7 @@ steps:
   dependsOn:
   - user-deployment
 
-- name: create-ingress
+- name: expose-service
   image: projectnebula/kubectl:bf8ecb9
   spec:
     command: apply
