@@ -16,7 +16,7 @@ steps:
   image: projectnebula/kubectl:bf8ecb9
   spec:
     command: apply
-    file: sock-shop/k8s/sock-shop-namespace.yml
+    file: sock-shop/k8s/sock-shop-ns.yml
     namespace: default
     cluster:
       name: nebula-demo-cluster
@@ -265,6 +265,419 @@ steps:
   dependsOn:
   - front-end-deployment
 
+- name: orders-db-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/orders-db-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: orders-db-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/orders-db-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - orders-db-deployment
+
+- name: orders-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/orders-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: orders-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/orders-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - orders-deployment
+
+- name: payment-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/payment-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: payment-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/payment-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - payment-deployment
+
+- name: queue-master-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/queue-master-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: queue-master-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/queue-master-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - queue-master-deployment
+
+- name: rabbitmq-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/rabbitmq-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: rabbitmq-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/rabbitmq-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - rabbitmq-deployment
+
+- name: session-db-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/session-db-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: session-db-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/session-db-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - session-db-deployment
+
+- name: shipping-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/shipping-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: shipping-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/shipping-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - shipping-deployment
+
+- name: user-db-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/user-db-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: user-db-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/user-db-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - user-db-deployment
+
+- name: user-deployment
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/user-dep.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
+
+- name: user-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/user-svc.yaml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  - user-deployment
 
 # - name: deploy-sockshop-demo
 #   image: projectnebula/kubectl:bf8ecb9
