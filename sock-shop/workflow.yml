@@ -7,10 +7,10 @@ steps:
   input:
     - echo "Initializing workflow - Deploy Sock Shop app onto GKE cluster"
     - echo "This Workflow will perform the following steps:"
-    - echo "  0. Provision GKE cluster with Terraform"
-    - echo "  1. Creating a 'sock-shop' namespace on the Kubernetes cluster"
-    - echo "  2. Deploying all services and deployments to create the Sock Shop application"
-    - echo "  3. Creating the ingress to access the service"
+    - echo "  1. Provision GKE cluster with Terraform"
+    - echo "  2. Creating a 'sock-shop' namespace on the Kubernetes cluster"
+    - echo "  3. Deploying all services and deployments to create the Sock Shop application"
+    - echo "  4. Creating the ingress to access the service"
     - echo "This workflow example assumes that you have an ingress controller installed and configured (as does GKE by default)."
 
 - name: provision-gke-with-terraform
@@ -709,37 +709,37 @@ steps:
   dependsOn:
   - user-deployment
 
-# - name: expose-service
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: sock-shop/k8s/front-end-ingress.yml
-#     namespace: sock-shop
-#     cluster:
-#       name: nebula-demo-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/kenazk/nebula-workflow-examples.git
-#   dependsOn:
-#   - carts-service
-#   - catalogue-service
-#   - front-end-service
-#   - orders-service
-#   - payment-service
-#   - queue-master-service
-#   - rabbitmq-service
-#   - session-db-service
-#   - shipping-service
-#   - user-service
+- name: expose-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: sock-shop/k8s/front-end-ingress.yml
+    namespace: sock-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/kenazk/nebula-workflow-examples.git
+  dependsOn:
+  # - carts-service
+  # - catalogue-service
+  - front-end-service
+  # - orders-service
+  # - payment-service
+  # - queue-master-service
+  # - rabbitmq-service
+  # - session-db-service
+  # - shipping-service
+  # - user-service
 
 # - name: deploy-sockshop-demo
 #   image: projectnebula/kubectl:bf8ecb9
