@@ -1,15 +1,16 @@
 terraform {
   required_version = ">= 0.11.11"
   backend "gcs" {
-    bucket = "demo-sandbox-123"
+    bucket = "ryan-socks"
     prefix = "demo"
   }
 }
 
 provider "google" {
   credentials = "${var.google-credentials}"
-  project     = "${local.workspace["gcp_project"]}"
-  region      = "${local.workspace["gcp_region"]}"
+  project     = "ryan-alliances"
+  region      = "us-west1"
+  zone        = "us-west1-b"
 }
 
 resource "google_container_cluster" "k8sexample" {
@@ -18,7 +19,7 @@ resource "google_container_cluster" "k8sexample" {
   location           = "${local.workspace["gcp_location"]}"
   initial_node_count = "${var.initial_node_count}"
   enable_kubernetes_alpha = "true"
-  enable_legacy_abac = "true"
+  enable_legacy_abac = "true" 
 
   master_auth {
     username = "${var.master_username}"

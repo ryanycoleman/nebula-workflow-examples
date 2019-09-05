@@ -22,7 +22,7 @@ steps:
         name: credentials
     git:
       name: nebula-workflow-examples
-      repository: https://github.com/puppetlabs/nebula-workflow-examples.git
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
   - init-workflow
 - name: slack-notify
