@@ -31,16 +31,16 @@ steps:
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
   - init-workflow
-- name: slack-notify
-  image: projectnebula/slack-notification:bf8ecb9
-  spec:
-    apitoken:
-      $type: Secret
-      name: slack-token
-    channel: "#nebula-workflows"
-    message: "Provisioning K8s with Terraform succeeded! Good job everyone."
-  dependsOn:
-  - provision-gke-with-terraform
+# - name: slack-notify
+#   image: projectnebula/slack-notification:bf8ecb9
+#   spec:
+#     apitoken:
+#       $type: Secret
+#       name: slack-token
+#     channel: "#nebula-workflows"
+#     message: "Provisioning K8s with Terraform succeeded! Good job everyone."
+#   dependsOn:
+#   - provision-gke-with-terraform
 
 - name: create-namespace
   image: projectnebula/kubectl:bf8ecb9
