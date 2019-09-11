@@ -17,9 +17,9 @@ steps:
   image: projectnebula/terraform:bf8ecb9
   spec:
     vars:
-      gcp_region: us-east1
-      gcp_location: us-east1-b
-      gcp_project: kenazk-sandbox
+      gcp_region: us-west1
+      gcp_location: us-west1-b
+      gcp_project: ryan-alliances
     workspace: nebula-demo
     directory: provision-gke-terraform/infra/
     credentials:
