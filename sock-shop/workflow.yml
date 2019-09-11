@@ -21,7 +21,7 @@ steps:
       gcp_location: us-west1-b
       gcp_project: ryan-alliances
     workspace: nebula-demo
-    directory: provision-gke-terraform/infra/
+    directory: sock-shop/infra/
     credentials:
       credentials.json:
         $type: Secret
