@@ -13,24 +13,24 @@ steps:
     - echo "  4. Creating the ingress to access the service"
     - echo "This workflow example assumes that you have an ingress controller installed and configured (as does GKE by default)."
 
-- name: provision-gke-with-terraform
-  image: projectnebula/terraform:bf8ecb9
-  spec:
-    vars:
-      gcp_region: us-west1
-      gcp_location: us-west1-b
-      gcp_project: ryan-alliances
-    workspace: nebula-demo
-    directory: hipster-shop/infra/
-    credentials:
-      credentials.json:
-        $type: Secret
-        name: credentials
-    git:
-      name: nebula-workflow-examples
-      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-  dependsOn:
-  - init-workflow
+# - name: provision-gke-with-terraform
+#   image: projectnebula/terraform:bf8ecb9
+#   spec:
+#     vars:
+#       gcp_region: us-west1
+#       gcp_location: us-west1-b
+#       gcp_project: ryan-alliances
+#     workspace: nebula-demo
+#     directory: hipster-shop/infra/
+#     credentials:
+#       credentials.json:
+#         $type: Secret
+#         name: credentials
+#     git:
+#       name: nebula-workflow-examples
+#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+#   dependsOn:
+#   - init-workflow
 # - name: slack-notify
 #   image: projectnebula/slack-notification:bf8ecb9
 #   spec:
@@ -63,7 +63,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - init-workflow
 
 - name: adservice
   image: projectnebula/kubectl:bf8ecb9
@@ -86,7 +86,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - create-namespace
 
 - name: adservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -109,7 +109,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform  
+  - create-namespace  
 
 - name: cartservice
   image: projectnebula/kubectl:bf8ecb9
@@ -132,7 +132,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - checkoutservice-svc
 
 - name: cartservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -155,7 +155,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform  
+  - cartservice  
 
 - name: checkoutservice
   image: projectnebula/kubectl:bf8ecb9
@@ -178,7 +178,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - redis-cart
 
 - name: checkoutservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -201,7 +201,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - checkoutservice
 
 - name: currencyservice
   image: projectnebula/kubectl:bf8ecb9
@@ -224,7 +224,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - redis-cart
 
 - name: currencyservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -247,7 +247,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - currencyservice
 
 - name: emailservice
   image: projectnebula/kubectl:bf8ecb9
@@ -270,7 +270,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - redis-cart
 
 - name: emailservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -293,7 +293,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - emailservice
 
 - name: frontend
   image: projectnebula/kubectl:bf8ecb9
@@ -316,7 +316,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - redis-cart
 
 - name: frontend-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -339,7 +339,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - frontend
 
 - name: expose-service
   image: projectnebula/kubectl:bf8ecb9
@@ -385,7 +385,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - front-end-svc
 
 - name: paymentservice
   image: projectnebula/kubectl:bf8ecb9
@@ -408,7 +408,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - redis-cart
 
 - name: paymentservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -431,7 +431,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - paymentservice
 
 - name: productcatalogservice
   image: projectnebula/kubectl:bf8ecb9
@@ -454,7 +454,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - redis-cart-svc
 
 - name: productcatalogservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -477,7 +477,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - productcatalogservice
 
 - name: recommendationservice
   image: projectnebula/kubectl:bf8ecb9
@@ -500,7 +500,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - redis-cart
 
 - name: recommendationservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -523,7 +523,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - recommendationservice
 
 - name: redis-cart
   image: projectnebula/kubectl:bf8ecb9
@@ -546,7 +546,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - create-namespace
 
 - name: redis-cart-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -569,7 +569,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform  
+  - redis-cart  
 
 - name: shippingservice
   image: projectnebula/kubectl:bf8ecb9
@@ -592,7 +592,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform
+  - redis-cart
 
 - name: shippingservice-svc
   image: projectnebula/kubectl:bf8ecb9
@@ -615,7 +615,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - provision-gke-with-terraform  
+  - shippingservice  
 
 # - name: slack-notify
 #   image: projectnebula/slack-notification:bf8ecb9
