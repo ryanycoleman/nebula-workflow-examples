@@ -155,7 +155,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - cartservice  
+  - checkoutservice-svc  
 
 - name: checkoutservice
   image: projectnebula/kubectl:bf8ecb9
@@ -201,7 +201,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - checkoutservice
+  - redis-cart
 
 - name: currencyservice
   image: projectnebula/kubectl:bf8ecb9
@@ -247,7 +247,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - currencyservice
+  - redis-cart
 
 - name: emailservice
   image: projectnebula/kubectl:bf8ecb9
@@ -293,7 +293,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - emailservice
+  - redis-cart
 
 - name: frontend
   image: projectnebula/kubectl:bf8ecb9
@@ -339,7 +339,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - frontend
+  - redis-cart
 
 - name: expose-service
   image: projectnebula/kubectl:bf8ecb9
@@ -431,7 +431,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - paymentservice
+  - redis-cart
 
 - name: productcatalogservice
   image: projectnebula/kubectl:bf8ecb9
@@ -569,7 +569,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - redis-cart  
+  - create-namespace  
 
 - name: shippingservice
   image: projectnebula/kubectl:bf8ecb9
