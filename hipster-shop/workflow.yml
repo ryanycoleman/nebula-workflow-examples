@@ -285,6 +285,52 @@ steps:
   dependsOn:
   - emailservice
 
+- name: shippingservice
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/shippingservice.yaml
+    namespace: default
+    cluster:
+      name: apparel-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - redis-cart-svc
+
+- name: shippingservice-svc
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/shippingservice-svc.yaml
+    namespace: default
+    cluster:
+      name: apparel-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - shippingservice  
+
 # - name: cartservice
 #   image: projectnebula/kubectl:bf8ecb9
 #   spec:
@@ -514,54 +560,6 @@ steps:
 #       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
 #   dependsOn:
 #   - recommendationservice
-
-
-
-# - name: shippingservice
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/shippingservice.yaml
-#     namespace: default
-#     cluster:
-#       name: apparel-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - redis-cart-svc
-
-# - name: shippingservice-svc
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/shippingservice-svc.yaml
-#     namespace: default
-#     cluster:
-#       name: apparel-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - shippingservice  
 
 # # - name: slack-notify
 # #   image: projectnebula/slack-notification:bf8ecb9
