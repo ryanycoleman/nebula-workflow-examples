@@ -15,7 +15,7 @@ locals {
 
 variable "credentials" {
   description = "The Google credentials data to use for authentication"
-  default     = file("/Users/ryan.coleman/.config/gcloud/application_default_credentials.json")
+  default     = ""
 }
 
 variable "initial_node_count" {
