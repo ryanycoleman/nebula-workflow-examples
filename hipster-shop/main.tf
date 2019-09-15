@@ -6,7 +6,7 @@ provider "google" {
 }
 
 terraform {
-  required_version = ">= 0.12.8"
+  required_version = ">= 0.12.6"
   backend "gcs" {
     bucket = "ryan-socks"
     prefix = "demo"
