@@ -2,7 +2,7 @@ provider "google" {
   project     = "ryan-alliances"
   region      = "us-west1"
   zone        = "us-west1-b"
-  credentials = file("/Users/ryan.coleman/.config/gcloud/application_default_credentials.json")
+  credentials = "${var.credentials}"
 }
 
 terraform {
