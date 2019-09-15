@@ -376,7 +376,99 @@ steps:
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
   - paymentservice
-  
+
+- name: productcatalogservice
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/productcatalogservice.yaml
+    namespace: default
+    cluster:
+      name: apparel-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - redis-cart-svc
+
+- name: productcatalogservice-svc
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/productcatalogservice-svc.yaml
+    namespace: default
+    cluster:
+      name: apparel-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - productcatalogservice
+
+- name: recommendationservice
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/recommendationservice.yaml
+    namespace: default
+    cluster:
+      name: apparel-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - redis-cart-svc
+
+- name: recommendationservice-svc
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/recommendationservice-svc.yaml
+    namespace: default
+    cluster:
+      name: apparel-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - recommendationservice
+
 # - name: cartservice
 #   image: projectnebula/kubectl:bf8ecb9
 #   spec:
@@ -468,98 +560,6 @@ steps:
 #       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
 #   dependsOn:
 #   - frontend
-
-# - name: productcatalogservice
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/productcatalogservice.yaml
-#     namespace: default
-#     cluster:
-#       name: apparel-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - redis-cart-svc
-
-# - name: productcatalogservice-svc
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/productcatalogservice-svc.yaml
-#     namespace: default
-#     cluster:
-#       name: apparel-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - productcatalogservice
-
-# - name: recommendationservice
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/recommendationservice.yaml
-#     namespace: default
-#     cluster:
-#       name: apparel-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - redis-cart-svc
-
-# - name: recommendationservice-svc
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/recommendationservice-svc.yaml
-#     namespace: default
-#     cluster:
-#       name: apparel-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - recommendationservice
 
 # # - name: slack-notify
 # #   image: projectnebula/slack-notification:bf8ecb9
