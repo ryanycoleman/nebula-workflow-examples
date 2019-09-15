@@ -12,6 +12,24 @@ steps:
     - echo "  3. Deploying all services and deployments to create the hipster Shop application"
     - echo "  4. Creating the ingress to access the service"
     - echo "This workflow example assumes that you have an ingress controller installed and configured (as does GKE by default)."
+- name: provision-gke-with-terraform
+  image: projectnebula/terraform:bf8ecb9
+  spec:
+    vars:
+      gcp_region: us-west1
+      gcp_location: us-west1-b
+      gcp_project: ryan-alliances
+    workspace: nebula-demo
+    directory: hipster-shop/
+    credentials:
+      credentials.json:
+        $type: Secret
+        name: credentials
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - init-workflow    
 - name: create-namespace
   image: projectnebula/kubectl:bf8ecb9
   spec:
@@ -33,8 +51,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - init-workflow
-
+  - provision-gke-with-terraform
 - name: redis-cart
   image: projectnebula/kubectl:bf8ecb9
   spec:
