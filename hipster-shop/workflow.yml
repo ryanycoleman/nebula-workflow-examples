@@ -14,7 +14,7 @@ steps:
     - echo "This workflow example assumes that you have an ingress controller installed and configured (as does GKE by default)."
 
 - name: provision-gke-with-terraform
-  image: projectnebula/terraform:bf8ecb9
+  image: projectnebula/terraform:037ae3f
   spec:
     vars:
       gcp_region: us-west1
