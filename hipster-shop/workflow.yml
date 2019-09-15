@@ -357,52 +357,6 @@ steps:
   dependsOn:
   - frontend
 
-- name: expose-service
-  image: projectnebula/kubectl:bf8ecb9
-  spec:
-    command: apply
-    file: hipster-shop/k8s/frontend-svc-lb.yaml
-    namespace: hipster-shop
-    cluster:
-      name: nebula-demo-cluster
-      url:
-        $type: Secret
-        name: url
-      cadata:
-        $type: Secret
-        name: cadata
-      token:
-        $type: Secret
-        name: token
-    git:
-      name: nebula-workflow-examples
-      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-  dependsOn:
-    - frontend-svc
-
-- name: loadgenerator
-  image: projectnebula/kubectl:bf8ecb9
-  spec:
-    command: apply
-    file: hipster-shop/k8s/loadgenerator.yaml
-    namespace: default
-    cluster:
-      name: nebula-demo-cluster
-      url:
-        $type: Secret
-        name: url
-      cadata:
-        $type: Secret
-        name: cadata
-      token:
-        $type: Secret
-        name: token
-    git:
-      name: nebula-workflow-examples
-      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-  dependsOn:
-  - front-end-svc
-
 - name: paymentservice
   image: projectnebula/kubectl:bf8ecb9
   spec:
@@ -599,3 +553,49 @@ steps:
 #     message: "Successfully deployed hipster Shop demo!"
 #   dependsOn:
 #   - expose-service
+
+- name: expose-service
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/frontend-svc-lb.yaml
+    namespace: hipster-shop
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+    - frontend-svc
+
+- name: loadgenerator
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/loadgenerator.yaml
+    namespace: default
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - expose-service
