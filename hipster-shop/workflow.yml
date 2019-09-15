@@ -55,97 +55,97 @@ steps:
   dependsOn:
   - provision-gke-with-terraform
 
-# - name: redis-cart
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/redis-cart.yaml
-#     namespace: default
-#     cluster:
-#       name: nebula-demo-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - create-namespace
+- name: redis-cart
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/redis-cart.yaml
+    namespace: default
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - create-namespace
 
-# - name: redis-cart-svc
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/redis-cart-svc.yaml
-#     namespace: default
-#     cluster:
-#       name: nebula-demo-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - redis-cart  
+- name: redis-cart-svc
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/redis-cart-svc.yaml
+    namespace: default
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - redis-cart  
 
-# - name: adservice
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/adservice.yaml
-#     namespace: default
-#     cluster:
-#       name: nebula-demo-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - create-namespace
+- name: adservice
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/adservice.yaml
+    namespace: default
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - redis-cart-svc
 
-# - name: adservice-svc
-#   image: projectnebula/kubectl:bf8ecb9
-#   spec:
-#     command: apply
-#     file: hipster-shop/k8s/adservice-svc.yaml
-#     namespace: default
-#     cluster:
-#       name: nebula-demo-cluster
-#       url:
-#         $type: Secret
-#         name: url
-#       cadata:
-#         $type: Secret
-#         name: cadata
-#       token:
-#         $type: Secret
-#         name: token
-#     git:
-#       name: nebula-workflow-examples
-#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-#   dependsOn:
-#   - adservice  
+- name: adservice-svc
+  image: projectnebula/kubectl:bf8ecb9
+  spec:
+    command: apply
+    file: hipster-shop/k8s/adservice-svc.yaml
+    namespace: default
+    cluster:
+      name: nebula-demo-cluster
+      url:
+        $type: Secret
+        name: url
+      cadata:
+        $type: Secret
+        name: cadata
+      token:
+        $type: Secret
+        name: token
+    git:
+      name: nebula-workflow-examples
+      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+  dependsOn:
+  - adservice  
 
 # - name: cartservice
 #   image: projectnebula/kubectl:bf8ecb9
