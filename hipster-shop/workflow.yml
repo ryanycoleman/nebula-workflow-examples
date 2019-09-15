@@ -147,51 +147,51 @@ steps:
   dependsOn:
   - adservice  
 
-- name: cartservice
-  image: projectnebula/kubectl:bf8ecb9
-  spec:
-    command: apply
-    file: hipster-shop/k8s/cartservice.yaml
-    namespace: default
-    cluster:
-      name: nebula-demo-cluster
-      url:
-        $type: Secret
-        name: url
-      cadata:
-        $type: Secret
-        name: cadata
-      token:
-        $type: Secret
-        name: token
-    git:
-      name: nebula-workflow-examples
-      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-  dependsOn:
-  - redis-cart-svc
+# - name: cartservice
+#   image: projectnebula/kubectl:bf8ecb9
+#   spec:
+#     command: apply
+#     file: hipster-shop/k8s/cartservice.yaml
+#     namespace: default
+#     cluster:
+#       name: nebula-demo-cluster
+#       url:
+#         $type: Secret
+#         name: url
+#       cadata:
+#         $type: Secret
+#         name: cadata
+#       token:
+#         $type: Secret
+#         name: token
+#     git:
+#       name: nebula-workflow-examples
+#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+#   dependsOn:
+#   - redis-cart-svc
 
-- name: cartservice-svc
-  image: projectnebula/kubectl:bf8ecb9
-  spec:
-    command: apply
-    file: hipster-shop/k8s/cartservice-svc.yaml
-    namespace: default
-    cluster:
-      name: nebula-demo-cluster
-      url:
-        $type: Secret
-        name: url
-      cadata:
-        $type: Secret
-        name: cadata
-      token:
-        $type: Secret
-        name: token
-    git:
-      name: nebula-workflow-examples
-      repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
-  dependsOn:
-  - cartservive  
+# - name: cartservice-svc
+#   image: projectnebula/kubectl:bf8ecb9
+#   spec:
+#     command: apply
+#     file: hipster-shop/k8s/cartservice-svc.yaml
+#     namespace: default
+#     cluster:
+#       name: nebula-demo-cluster
+#       url:
+#         $type: Secret
+#         name: url
+#       cadata:
+#         $type: Secret
+#         name: cadata
+#       token:
+#         $type: Secret
+#         name: token
+#     git:
+#       name: nebula-workflow-examples
+#       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
+#   dependsOn:
+#   - cartservive  
 
 # - name: checkoutservice
 #   image: projectnebula/kubectl:bf8ecb9
