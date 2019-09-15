@@ -577,7 +577,7 @@ steps:
   spec:
     command: apply
     file: hipster-shop/k8s/frontend-svc-lb.yaml
-    namespace: hipster-shop
+    namespace: default
     cluster:
       name: apparel-cluster
       url:
