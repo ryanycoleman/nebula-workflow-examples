@@ -39,7 +39,7 @@ steps:
     file: hipster-shop/k8s/hipster-shop-ns.yaml
     namespace: default
     cluster:
-      name: nebula-demo-cluster
+      name: apparel-cluster
       url:
         $type: Secret
         name: url
@@ -62,7 +62,7 @@ steps:
     file: hipster-shop/k8s/redis-cart.yaml
     namespace: default
     cluster:
-      name: nebula-demo-cluster
+      name: apparel-cluster
       url:
         $type: Secret
         name: url
@@ -85,7 +85,7 @@ steps:
     file: hipster-shop/k8s/redis-cart-svc.yaml
     namespace: default
     cluster:
-      name: nebula-demo-cluster
+      name: apparel-cluster
       url:
         $type: Secret
         name: url
@@ -108,7 +108,7 @@ steps:
     file: hipster-shop/k8s/adservice.yaml
     namespace: default
     cluster:
-      name: nebula-demo-cluster
+      name: apparel-cluster
       url:
         $type: Secret
         name: url
@@ -131,7 +131,7 @@ steps:
     file: hipster-shop/k8s/adservice-svc.yaml
     namespace: default
     cluster:
-      name: nebula-demo-cluster
+      name: apparel-cluster
       url:
         $type: Secret
         name: url
@@ -154,7 +154,7 @@ steps:
 #     file: hipster-shop/k8s/cartservice.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -177,7 +177,7 @@ steps:
 #     file: hipster-shop/k8s/cartservice-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -200,7 +200,7 @@ steps:
 #     file: hipster-shop/k8s/checkoutservice.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -223,7 +223,7 @@ steps:
 #     file: hipster-shop/k8s/checkoutservice-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -246,7 +246,7 @@ steps:
 #     file: hipster-shop/k8s/currencyservice.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -269,7 +269,7 @@ steps:
 #     file: hipster-shop/k8s/currencyservice-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -292,7 +292,7 @@ steps:
 #     file: hipster-shop/k8s/emailservice.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -315,7 +315,7 @@ steps:
 #     file: hipster-shop/k8s/emailservice-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -338,7 +338,7 @@ steps:
 #     file: hipster-shop/k8s/frontend.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -361,7 +361,7 @@ steps:
 #     file: hipster-shop/k8s/frontend-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -384,7 +384,7 @@ steps:
 #     file: hipster-shop/k8s/paymentservice.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -407,7 +407,7 @@ steps:
 #     file: hipster-shop/k8s/paymentservice-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -430,7 +430,7 @@ steps:
 #     file: hipster-shop/k8s/productcatalogservice.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -453,7 +453,7 @@ steps:
 #     file: hipster-shop/k8s/productcatalogservice-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -476,7 +476,7 @@ steps:
 #     file: hipster-shop/k8s/recommendationservice.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -499,7 +499,7 @@ steps:
 #     file: hipster-shop/k8s/recommendationservice-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -524,7 +524,7 @@ steps:
 #     file: hipster-shop/k8s/shippingservice.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -547,7 +547,7 @@ steps:
 #     file: hipster-shop/k8s/shippingservice-svc.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -581,7 +581,7 @@ steps:
 #     file: hipster-shop/k8s/frontend-svc-lb.yaml
 #     namespace: hipster-shop
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
@@ -604,7 +604,7 @@ steps:
 #     file: hipster-shop/k8s/loadgenerator.yaml
 #     namespace: default
 #     cluster:
-#       name: nebula-demo-cluster
+#       name: apparel-cluster
 #       url:
 #         $type: Secret
 #         name: url
