@@ -513,7 +513,7 @@ steps:
       name: nebula-workflow-examples
       repository: https://github.com/ryanycoleman/nebula-workflow-examples.git
   dependsOn:
-  - cartservive
+  - cartservice
 
 - name: frontend
   image: projectnebula/kubectl:bf8ecb9
