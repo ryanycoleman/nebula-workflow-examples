@@ -16,7 +16,7 @@ resource "google_container_cluster" "k8sexample" {
   name               = "k8sexample-cluster"
   description        = "example k8s cluster"
   location           = "${local.workspace["gcp_location"]}"
-  initial_node_count = 3
+  initial_node_count = 5
   enable_kubernetes_alpha = "true"
   enable_legacy_abac = "true" 
   # autoscaling {
