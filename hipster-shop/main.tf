@@ -16,20 +16,20 @@ resource "google_container_cluster" "k8sexample" {
   name               = "k8sexample-cluster"
   description        = "example k8s cluster"
   location           = "${local.workspace["gcp_location"]}"
-  initial_node_count = "${var.initial_node_count}"
+  initial_node_count = 3
   enable_kubernetes_alpha = "true"
   enable_legacy_abac = "true" 
-  #cluster_autoscaling = "true"
-
+  # autoscaling {
+  #   min_node_count = 0 
+  #   max_node_count = 5
+  # }
   master_auth {
     username = "${var.master_username}"
     password = "${var.master_password}"
-
     client_certificate_config {
       issue_client_certificate = true
     }
   }
-
   node_config {
     machine_type = "${var.node_machine_type}"
     disk_size_gb = "${var.node_disk_size}"
